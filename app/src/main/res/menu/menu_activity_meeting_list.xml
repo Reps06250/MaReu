@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_filter"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Filtre">
+
+        <menu>
+            <item
+                android:id="@+id/by_rooms"
+                android:title="Filter By Room"/>
+            <item
+                android:id="@+id/by_Date"
+                android:title="Filter By Date"
+                android:checkable="true"/>
+        </menu>
+
+    </item>
+</menu>

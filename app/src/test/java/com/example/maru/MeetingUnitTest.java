@@ -1,0 +1,63 @@
+package com.example.maru;
+
+import com.example.maru.di.DI;
+import com.example.maru.model.Meeting;
+import com.example.maru.service.DummyMeetingGenerator;
+import com.example.maru.service.MeetingApiService;
+
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+@RunWith(JUnit4.class)
+public class MeetingUnitTest {
+
+    private MeetingApiService service;
+
+    @Before
+    public void setup() {
+        service = DI.getNewInstanceApiService();
+    }
+
+    @Test
+    public void getNeighboursWithSuccess() {
+        List<Meeting> meetings = service.getMeetings();
+        List<Meeting> expectedmeetings = DummyMeetingGenerator.DUMMY_MEETINGS;
+        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedmeetings.toArray()));
+    }
+
+    @Test
+    public void deleteNeighbourWithSuccess() {
+        Meeting meetingToDelete = service.getMeetings().get(0);
+        service.deleteMeeting(meetingToDelete);
+        assertFalse(service.getMeetings().contains(meetingToDelete));
+    }
+
+    @Test
+    public void createNeighboursWithSuccess() {
+        List<Meeting> meetings = service.getMeetings();
+        // save meetings list size
+        int meetingsOriginalSize = meetings.size();
+        Meeting meeting= new Meeting("A", "Android","laura, nico, pauline, sandrine",1589882400000L,1800000L,"#E873F2");
+        //check meetings not contain meeting
+        assertFalse(service.getMeetings().contains(meeting));
+        // Add meeting
+        service.createMeeting(meeting);
+        //check meetings contain meeting
+        assertTrue(service.getMeetings().contains(meeting));
+        // Check meetings have 1 element more
+        assertEquals(meetings.size(), meetingsOriginalSize + 1, 0.001);
+    }
+}
