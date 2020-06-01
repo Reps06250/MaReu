@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 import de.greenrobot.event.EventBus;
 
@@ -34,11 +35,12 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     private ActivityAddMeetingBinding binding;
     MeetingApiService mApiService;
     Calendar calendar;
+    private String dateString;
     private long date = 0;
     private long time = 0;
     private int launchOrNot;
     int year,month,day,hour,minute,second;
-    boolean h24 = false;
+    boolean h24 = true;
     private Timepoint[] timepoints;
 
     private long dateAndTime;
@@ -86,12 +88,13 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         EventBus.getDefault().unregister(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String dateString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-        binding.dateBt.setText("Date de la réunion : " + dateString);
+        dateString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+        binding.dateBt.setText(getString(R.string.date_de_la_reunion) + dateString);
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString).getTime();
+            date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(dateString)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -99,14 +102,15 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         launchDuree();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        if(hourOfDay >=10 && minute < 10) binding.timeBt.setText("Heure de la réunion :   " + hourOfDay + "H0" + minute);
-        else if (hourOfDay < 10 && minute > 0) binding.timeBt.setText(String.format(Locale.ENGLISH,"Heure de la réunion :   0%dH%d", hourOfDay, minute));
-        else if (hourOfDay < 10 && minute < 10) binding.timeBt.setText("Heure de la réunion :   0" + hourOfDay + "H0" + minute);
-        else binding.timeBt.setText("Heure de la réunion :   " + hourOfDay + "H" + minute);
+        if(hourOfDay >=10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion) + hourOfDay + "H0" + minute);
+        else if (hourOfDay < 10 && minute > 0) binding.timeBt.setText(String.format(Locale.ENGLISH,getString(R.string.heure_de_la_reunion1), hourOfDay, minute));
+        else if (hourOfDay < 10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion2) + hourOfDay + "H0" + minute);
+        else binding.timeBt.setText(getString(R.string.heure_de_le_reunion3) + hourOfDay + "H" + minute);
         try {
-            time = new SimpleDateFormat("HH:mm").parse(hourOfDay+":"+minute).getTime();
+            time = Objects.requireNonNull(new SimpleDateFormat("HH:mm").parse(hourOfDay + ":" + minute)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -115,7 +119,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         launchRooms();
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     public void onEvent(LaunchDialogEvent event){
         String dialog = event.getDialog();
         switch(dialog){
@@ -128,19 +132,19 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
             case "room" :
                 binding.roomBt.setBackgroundResource(R.drawable.border2);
                 room = event.getString();
-                binding.roomBt.setText("Salle de réunion :   " + room);
+                binding.roomBt.setText(getString(R.string.salle_de_la_reunion) + room);
                 if(launchOrNot!= 1) launchSubject();
                 break;
             case "subject" :
-                binding.subjectBt.setBackgroundResource(R.drawable.border2);
                 subject = event.getString();
-                binding.subjectBt.setText("Sujet : " + subject);
+                if(!subject.equals(""))binding.subjectBt.setBackgroundResource(R.drawable.border2);
+                binding.subjectBt.setText(getString(R.string.sujet) + subject);
                 if(launchOrNot!= 1) launchParticipants();
                 break;
             case "participants" :
-                binding.participantsBt.setBackgroundResource(R.drawable.border2);
                 launchOrNot = event.getData();
                 listeDesParticipants = event.getString();
+                if(!listeDesParticipants.equals(""))binding.participantsBt.setBackgroundResource(R.drawable.border2);
                 binding.participantsTv.setText(listeDesParticipants);
         }
     }
@@ -155,12 +159,12 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
             case R.id.subject_bt : launchSubject(); break;
             case R.id.participants_bt : launchParticipants(); break;
             case R.id.ok_fab :
-                if(date == 0) Toast.makeText(getApplicationContext(),"Indiquer la date de la réunion svp",Toast.LENGTH_SHORT).show();
-                else if(duree == 0) Toast.makeText(getApplicationContext(),"Indiquer la durée de la réunion svp",Toast.LENGTH_SHORT).show();
-                else if(time == 0) Toast.makeText(getApplicationContext(),"Indiquer l'heure de la réunion svp",Toast.LENGTH_SHORT).show();
-                else if(room == null) Toast.makeText(getApplicationContext(),"Indiquer la salle de la réunion svp",Toast.LENGTH_SHORT).show();
+                if(date == 0) Toast.makeText(getApplicationContext(), R.string.toast_date,Toast.LENGTH_SHORT).show();
+                else if(duree == 0) Toast.makeText(getApplicationContext(), R.string.toast_duree,Toast.LENGTH_SHORT).show();
+                else if(time == 0) Toast.makeText(getApplicationContext(), R.string.toast_heure,Toast.LENGTH_SHORT).show();
+                else if(room == null) Toast.makeText(getApplicationContext(), R.string.toast_room,Toast.LENGTH_SHORT).show();
                 else{
-                    Meeting meeting = new Meeting(room, subject, listeDesParticipants, dateAndTime,duree, getColor());
+                    Meeting meeting = new Meeting(room, subject, listeDesParticipants, dateAndTime,duree, mApiService.getColor());
                     mApiService.createMeeting(meeting);
                     finish();
                 }
@@ -168,18 +172,12 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public String getColor(){
-        List<String> colors = Arrays.asList("#E873F2","#7F73F2","#73F29D","#F2F273","#F27573");
-        Random random = new Random();
-        return colors.get(random.nextInt(colors.size()));
-    }
-
     public void launchTime() {
-        if(date == 0) Toast.makeText(getApplicationContext(),"Indiquer la date de la réunion svp",Toast.LENGTH_SHORT).show();
-        else if(duree == 0) Toast.makeText(getApplicationContext(),"Indiquer la durée de la réunion svp",Toast.LENGTH_SHORT).show();
+        if(date == 0) Toast.makeText(getApplicationContext(),R.string.toast_date,Toast.LENGTH_SHORT).show();
+        else if(duree == 0) Toast.makeText(getApplicationContext(),R.string.toast_duree,Toast.LENGTH_SHORT).show();
         else{
             TimePickerDialog tpd = TimePickerDialog.newInstance(AddMeetingActivity.this, hour, minute, h24);
-            tpd.setTitle("Heure de la réunion");
+            tpd.setTitle(getString(R.string.heure_de_la_reunion_title));
             tpd.setMinTime(mApiService.getOpenHour());
             tpd.setMaxTime(mApiService.getClosedHour());
             tpd.setTimeInterval(1,mApiService.getMinuteIntervalInt());
@@ -190,14 +188,14 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
 
     public void launchDate(){
         com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(AddMeetingActivity.this, year, month, day);
-        dpd.setTitle("Date de la réunion");
+        dpd.setTitle(getString(R.string.date_de_la_reunion_title));
         dpd.setMinDate(calendar);
-//        dpd.setDisabledDays(mApiService.getDisabledDays());
+        dpd.setDisabledDays(mApiService.getDisabledDays());
         dpd.show(getSupportFragmentManager(), "DatePickerDialog");
     }
 
     public void launchDuree(){
-        if(date == 0) Toast.makeText(getApplicationContext(),"Indiquer la date de la réunion svp",Toast.LENGTH_SHORT).show();
+        if(date == 0) Toast.makeText(getApplicationContext(),R.string.toast_date,Toast.LENGTH_SHORT).show();
         else{
             DureePicker dureePicker = new DureePicker();
             dureePicker.show(getSupportFragmentManager(), "duréePicker");
@@ -205,9 +203,9 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void launchRooms(){
-        if(date == 0) Toast.makeText(getApplicationContext(),"Indiquer la date de la réunion svp",Toast.LENGTH_SHORT).show();
-        else if(duree == 0) Toast.makeText(getApplicationContext(),"Indiquer la durée de la réunion svp",Toast.LENGTH_SHORT).show();
-        else if(time == 0) Toast.makeText(getApplicationContext(),"Indiquer l'heure de la réunion svp",Toast.LENGTH_SHORT).show();
+        if(date == 0) Toast.makeText(getApplicationContext(),R.string.toast_date,Toast.LENGTH_SHORT).show();
+        else if(duree == 0) Toast.makeText(getApplicationContext(),R.string.toast_duree,Toast.LENGTH_SHORT).show();
+        else if(time == 0) Toast.makeText(getApplicationContext(),R.string.toast_heure,Toast.LENGTH_SHORT).show();
         else {
             RoomDialogFragment roomDialogFragment = new RoomDialogFragment(false, dateAndTime, duree);
             roomDialogFragment.show(getSupportFragmentManager(), "roomPicker");

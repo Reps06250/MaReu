@@ -4,16 +4,19 @@ import com.example.maru.model.Meeting;
 import com.wdullaer.materialdatetimepicker.time.Timepoint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class DummyMeetingApiService implements MeetingApiService {
 
     private Timepoint openHour = new Timepoint(8,00);
     private Timepoint closedHour = new Timepoint(22,00);
-    private Calendar[] disabledDays = new Calendar[Calendar.SUNDAY];
+    private Calendar[] disabledDays = new Calendar[0];
     private int minuteIntervalInt = 15; //minimum 1
     private int maxMeetingTimeInMinutes = 240;
+    private List<String> colors = Arrays.asList("#7FE873F2","#7F7F73F2","#8073F29D","#80F2F273","#7FF27573");
 
     private List<Meeting> meetings = DummyMeetingGenerator.generateMeetings();
     private List<String> rooms = DummyMeetingGenerator.generateRooms();
@@ -77,15 +80,6 @@ public class DummyMeetingApiService implements MeetingApiService {
         return liste;
     }
 
-
-//    @Override
-//    public List<Meeting> getDateFilteredMeetings(List<Meeting> list, String date){
-//        List<Meeting> filteredList = new ArrayList<>();
-////        for( Meeting meeting : list)
-////            if(meeting.getDate().equals(date)) filteredList.add(meeting);
-//        return filteredList;
-//    }
-
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetings.remove(meeting);
@@ -94,5 +88,11 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public void createMeeting(Meeting meeting) {
         meetings.add(meeting);
+    }
+
+    @Override
+    public String getColor(){
+        Random random = new Random();
+        return colors.get(random.nextInt(colors.size()));
     }
 }

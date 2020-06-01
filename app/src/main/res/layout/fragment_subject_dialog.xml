@@ -9,12 +9,12 @@
     android:gravity="center"
     android:layout_height="match_parent">
     <TextView android:id="@+id/subject_title"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/fragment_subject_dialog_title_text_width"
         android:layout_height="wrap_content"
-        android:text="Sujet De La Réunion"
+        android:text="@string/fragment_subject_dialog_subject_title"
         android:background="@color/colorPrimary"
         android:textColor="#fff"
-        android:textSize="25sp"
+        android:textSize="@dimen/fragment_dialog_title_text_size"
         android:gravity="center"
         android:padding="10dp"
         />
@@ -23,15 +23,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/subject_et"
-        android:hint="     Entrer le sujet de la réunion     "
+        android:textSize="@dimen/fragment_subject_dialog_et_text_size"
+        android:hint="@string/fragment_subject_dialog_subject_et_hint"
         android:gravity="center"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ok_subject_bt"
         android:backgroundTint="@color/colorPrimary"
-        android:text="OK"
+        android:text="@string/ok"
         android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/fragment_dialog_button"/>
 
 </LinearLayout>

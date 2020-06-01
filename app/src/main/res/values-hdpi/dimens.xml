@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_margin">10dp</dimen>
+
+    <dimen name="activity_meeting_list_fab_margin">16dp</dimen>
+
+    <dimen name="meeting_item_margin">0dp</dimen>
+    <dimen name="meeting_item_circlesize">30dp</dimen>
+    <dimen name="meeting_item_info_width">240dp</dimen>
+    <dimen name="meeting_item_info_text_size">16sp</dimen>
+    <dimen name="meeting_item_participants_text_size">13sp</dimen>
+
+    <dimen name="item_text_size">10sp</dimen>
+    <dimen name="item_text_padding">3dp</dimen>
+
+    <dimen name="fragment_dialog_title_text_size">20sp</dimen>
+    <dimen name="fragment_dialog_button">15sp</dimen>
+
+    <dimen name="activity_add_meeting_title_text_size">25sp</dimen>
+    <dimen name="activity_add_meeting_buttons_text_size">13sp</dimen>
+    <dimen name="activity_add_meeting_tv_text_size">15sp</dimen>
+    <dimen name="activity_add_meeting_buttons_height">30dp</dimen>
+    <dimen name="activity_add_meeting_buttons_margin">10dp</dimen>
+    <dimen name="activity_add_meeting_buttons_marginTop">30dp</dimen>
+    <dimen name="activity_add_meeting_fab_marginTop">10dp</dimen>
+    <dimen name="activity_add_meeting_fab_marginBot">10dp</dimen>
+
+    <dimen name="fragment_subject_dialog_title_text_size">25sp</dimen>
+    <dimen name="fragment_subject_dialog_title_text_width">280dp</dimen>
+    <dimen name="fragment_subject_dialog_et_text_size">17sp</dimen>
+
+    <dimen name="fragment_participants_dialog_title_text_size">25sp</dimen>
+    <dimen name="fragment_participants_dialog_title_text_width">280dp</dimen>
+    <dimen name="fragment_participants_dialog_et_text_size">17sp</dimen>
+    <dimen name="fragment_participants_dialog_tv_text_size">15sp</dimen>
+
+</resources>

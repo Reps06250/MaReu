@@ -1,13 +1,14 @@
 package com.example.maru.UI;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.maru.Event.LaunchDialogEvent;
 import com.example.maru.R;
@@ -38,7 +39,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         Meeting meeting = meetingsList.get(position);
         holder.details.setText("Réunion " + meeting.getRoom() +" - "+ getTime(meeting)+" - "+meeting.getSubject());
         holder.participants.setText(meeting.getParticipants());
-        holder.circle.setCardBackgroundColor(Color.parseColor(meeting.getColor()));
+        holder.gd.setColor(Color.parseColor(meeting.getColor()));
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,14 +64,16 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     public class MeetingListViewHolder extends RecyclerView.ViewHolder {
         TextView details;
         TextView participants;
-        CardView circle;
+        ImageView circle;
         ImageButton delete;
+        GradientDrawable gd ;
         public MeetingListViewHolder(@NonNull View itemView) {
             super(itemView);
                  details = itemView.findViewById(R.id.details);
                  participants = itemView.findViewById(R.id.participants);
                  circle = itemView.findViewById((R.id.circle));
                  delete = itemView.findViewById(R.id.delete_bt);
+                 gd = (GradientDrawable) circle.getBackground();
         }
     }
 

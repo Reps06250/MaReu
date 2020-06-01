@@ -32,7 +32,7 @@ public class DureePicker extends DialogFragment {
 
     private RecyclerView recyclerView;
     private DialogAdapter adapter;
-    MeetingApiService mApiService;
+    private MeetingApiService mApiService;
 
     public DureePicker() {
     }
@@ -42,11 +42,11 @@ public class DureePicker extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dialog, container, false);
         TextView title = (TextView) view.findViewById(R.id.title);
-        title.setText("Durée De La Réunion");
+        title.setText(R.string.duree_de_le_reunion);
         mApiService = DI.getMeetingApiService();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
         adapter = new DialogAdapter(mApiService.getListeDesDurees());
         recyclerView.setAdapter(adapter);
         configureOnClickRecyclerView();

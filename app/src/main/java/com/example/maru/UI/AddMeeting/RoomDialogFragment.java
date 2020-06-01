@@ -24,6 +24,7 @@ import com.example.maru.service.MeetingApiService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
 
@@ -57,13 +58,14 @@ public class RoomDialogFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dialog, container, false);
         TextView title = (TextView) view.findViewById(R.id.title);
-        title.setText("Salles Disponibles");
+        if(fromMenu)title.setText(R.string.salles);
+        else title.setText(R.string.salles_disponibles);
         mApiService = DI.getMeetingApiService();
         listWithAll.add("ALL");
         listWithAll.addAll(mApiService.getRoomsList());
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
         if(fromMenu)adapter = new DialogAdapter(listWithAll);
         else adapter = new DialogAdapter(CheckValidity.getFreeRooms(dateAndTime,duree));
         recyclerView.setAdapter(adapter);

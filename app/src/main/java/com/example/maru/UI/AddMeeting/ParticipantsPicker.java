@@ -2,6 +2,7 @@ package com.example.maru.UI.AddMeeting;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -33,7 +34,7 @@ public class ParticipantsPicker extends DialogFragment implements View.OnClickLi
      }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         binding = FragmentParticipantsDialogBinding.inflate(inflater, container, false);
@@ -52,7 +53,7 @@ public class ParticipantsPicker extends DialogFragment implements View.OnClickLi
                     listeDesParticipants += (participant + " ; ");
                     //binding.participantEt.clearComposingText();
                     binding.participantEt.setText("");
-                    binding.participantsTv.setText(listeDesParticipants);
+                    binding.participantsTv0.setText(listeDesParticipants);
                 }
                 break;
             case R.id.ok_participants_bt :

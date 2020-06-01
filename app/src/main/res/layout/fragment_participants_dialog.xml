@@ -8,13 +8,13 @@
     android:padding="5dp"
     android:gravity="center"
     android:layout_height="match_parent">
-    <TextView android:id="@+id/subject_title"
-        android:layout_width="match_parent"
+    <TextView android:id="@+id/participants_title"
+        android:layout_width="@dimen/fragment_participants_dialog_title_text_width"
         android:layout_height="wrap_content"
-        android:text="Participants"
+        android:text="@string/fragment_participants_dialog_title"
         android:background="@color/colorPrimary"
         android:textColor="#fff"
-        android:textSize="25sp"
+        android:textSize="@dimen/fragment_participants_dialog_title_text_size"
         android:gravity="center"
         android:padding="5dp"/>
 
@@ -22,14 +22,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/participant_et"
-        android:hint="Ajouter un participant"
+        android:hint="@string/fragment_participants_dialog_participant_et"
+        android:textSize="@dimen/fragment_participants_dialog_et_text_size"
         android:gravity="center"
         android:padding="10dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/fragment_participants_dialog_add"
+        android:textSize="@dimen/fragment_dialog_button"
         android:id="@+id/add_participant"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"/>
@@ -37,9 +39,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/participants_tv"
-        android:text="liste des participants"
+        android:id="@+id/participants_tv0"
+        android:text="@string/fragment_participants_dialog_participants_tv"
         android:gravity="center"
+        android:textSize="@dimen/fragment_participants_dialog_tv_text_size"
         android:padding="20dp"/>
 
     <Button
@@ -47,8 +50,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/ok_participants_bt"
         android:backgroundTint="@color/colorPrimary"
-        android:text="OK"
+        android:text="@string/ok"
         android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/fragment_dialog_button"/>
 
 </LinearLayout>

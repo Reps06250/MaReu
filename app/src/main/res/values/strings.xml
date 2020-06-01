@@ -3,4 +3,36 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="meeting_item_detail_empty">Réunion 0 - 00h00 - Androidddddd</string>
+    <string name="meeting_item_participants_empty">bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</string>
+    <string name="fragment_subject_dialog_subject_title">Sujet De La Réunion</string>
+    <string name="fragment_subject_dialog_subject_et_hint">Entrer le sujet de la réunion</string>
+    <string name="ok">OK</string>
+    <string name="fragment_participants_dialog_participants_tv">liste des participants</string>
+    <string name="fragment_participants_dialog_add">Add</string>
+    <string name="fragment_participants_dialog_participant_et">Ajouter un participant</string>
+    <string name="fragment_participants_dialog_title">Participants</string>
+    <string name="activity_add_meeting_participants_bt">Participants de la réunion :</string>
+    <string name="activity_add_meeting_subject_bt">Sujet de la réunion</string>
+    <string name="activity_add_meeting_room_bt">Salle de réunion</string>
+    <string name="activity_add_meeting_time_bt">Heure de la réunion</string>
+    <string name="activity_add_meeting_duree_bt">Durée de la réunion</string>
+    <string name="activity_add_meeting_date_bt">Date de la réunion</string>
+    <string name="activity_add_meeting_title">NOUVELLE RÉUNION</string>
+    <string name="salles">   Salles   </string>
+    <string name="salles_disponibles">Salles Disponibles</string>
+    <string name="duree_de_le_reunion">Durée De La Réunion</string>
+    <string name="date_de_la_reunion">Date de la réunion : </string>
+    <string name="heure_de_la_reunion">Heure de la réunion :   </string>
+    <string name="heure_de_la_reunion1">Heure de la réunion :   0%dH%d</string>
+    <string name="heure_de_la_reunion2">Heure de la réunion :   0</string>
+    <string name="heure_de_le_reunion3">Heure de la réunion :   </string>
+    <string name="salle_de_la_reunion">Salle de réunion :   </string>
+    <string name="sujet">Sujet : </string>
+    <string name="toast_date">Indiquer la date de la réunion svp</string>
+    <string name="toast_duree">Indiquer la durée de la réunion svp</string>
+    <string name="toast_heure">Indiquer l\'heure de la réunion svp</string>
+    <string name="toast_room">Indiquer la salle de la réunion svp</string>
+    <string name="heure_de_la_reunion_title">Heure de la réunion</string>
+    <string name="date_de_la_reunion_title">Date de la réunion</string>
 </resources>

@@ -4,42 +4,42 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_marginTop="15dp"
+    android:layout_marginTop="@dimen/meeting_item_margin"
     android:layout_marginBottom="15dp">
 
-    <androidx.cardview.widget.CardView
+    <ImageView
         android:id="@+id/circle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:cardCornerRadius="360dp"
-        app:cardBackgroundColor="@android:color/black"
+        android:background="@drawable/circle"
+        android:layout_width="@dimen/meeting_item_circlesize"
+        android:layout_height="@dimen/meeting_item_circlesize"
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
-        android:layout_width="305dp"
+        android:layout_width="@dimen/meeting_item_info_width"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/info"
         app:layout_constraintBottom_toBottomOf="@+id/circle"
         app:layout_constraintStart_toEndOf="@+id/circle"
         app:layout_constraintTop_toTopOf="@+id/circle"
+        app:layout_constraintEnd_toStartOf="@+id/delete_bt"
         android:padding="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/details"
-            android:text="Réunion 0 - 00h00 -  Androidddddd"
+            android:text="@string/meeting_item_detail_empty"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/meeting_item_info_text_size"
             android:textColor="@android:color/black"
-            android:layout_marginStart="5dp"/>
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:id="@+id/participants"
@@ -49,9 +49,9 @@
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:text="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-            android:textSize="15sp"
-            android:layout_marginStart="5dp"/>
+            android:text="@string/meeting_item_participants_empty"
+            android:textSize="@dimen/meeting_item_participants_text_size"
+            android:layout_marginStart="10dp"/>
     </LinearLayout>
 
     <ImageButton
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/info"
-        android:src="@drawable/ic_delete_black_40dp"
+        android:src="@drawable/ic_delete_black"
         android:layout_marginEnd="5dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

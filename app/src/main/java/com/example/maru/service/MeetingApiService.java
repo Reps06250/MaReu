@@ -12,6 +12,7 @@ public interface MeetingApiService {
     List<Meeting> getRoomsFilteredMeetings(String room);
     List<Meeting> getDateFilteredMeetings(List<Meeting> list, long date);
     List<String> getRoomsList();
+    String getColor() ;
     Timepoint getOpenHour();
     long getOpenHourLong();
     Timepoint getClosedHour();

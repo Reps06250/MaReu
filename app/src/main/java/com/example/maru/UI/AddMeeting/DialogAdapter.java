@@ -37,7 +37,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DureeViewH
     }
 
 
-    public class DureeViewHolder extends RecyclerView.ViewHolder {
+    public static class DureeViewHolder extends RecyclerView.ViewHolder {
         TextView item;
         public DureeViewHolder(@NonNull View itemView) {
             super(itemView);

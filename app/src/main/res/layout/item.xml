@@ -12,8 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="5dp"
-        android:text="text"
+        android:padding="@dimen/item_text_padding"
+        android:text=""
+        android:textSize="@dimen/item_text_size"
         android:textColor="@android:color/white" />
 
 </androidx.cardview.widget.CardView>

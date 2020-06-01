@@ -12,12 +12,16 @@ import com.example.maru.Event.LaunchDialogEvent;
 import com.example.maru.R;
 import com.example.maru.UI.AddMeeting.AddMeetingActivity;
 import com.example.maru.UI.AddMeeting.RoomDialogFragment;
+import com.example.maru.di.DI;
+import com.example.maru.model.Meeting;
+import com.example.maru.service.MeetingApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -25,12 +29,15 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
 
     FloatingActionButton fab;
     Calendar calendar;
-    int year,month,day;
-    long date;
+    private int year,month,day;
+    private long date;
+    private MeetingApiService apiService = DI.getMeetingApiService();
+    private MeetingApiService newApiService = DI.getNewInstanceApiService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refreshList();
         setContentView(R.layout.activity_meeting_list);
         this.configureToolbar();
         calendar = Calendar.getInstance();
@@ -38,6 +45,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         fab = findViewById(R.id.add_meeting);
+        System.out.println();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,9 +80,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
             else{
                 item.setChecked(true);
                 DatePickerDialog dpd = DatePickerDialog.newInstance(MeetingListActivity.this, year, month, day);
-                dpd.setTitle("Date de la réunion");
-                dpd.setMinDate(calendar);
-//                dpd.setDisabledDays(mApiService.getDisabledDays());
+                dpd.setTitle("Date des réunions");
+                dpd.setDisabledDays(apiService.getDisabledDays());
                 dpd.show(getSupportFragmentManager(), "DatePickerDialog");
             }
         }
@@ -90,5 +97,12 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
             e.printStackTrace();
         }
         EventBus.getDefault().post(new LaunchDialogEvent("dateFilter", date));
+    }
+
+    public void refreshList(){
+        List<Meeting> meetings = apiService.getMeetings();
+        List<Meeting> initialMeetings = newApiService.getMeetings();
+        meetings.clear();
+        meetings.addAll(initialMeetings);
     }
 }
