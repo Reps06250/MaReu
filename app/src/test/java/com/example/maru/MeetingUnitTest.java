@@ -72,8 +72,7 @@ public class MeetingUnitTest {
         String room = "F";
         List<Meeting> filtredList = new ArrayList<>();
         List<Meeting> meetings = service.getMeetings();
-        for( Meeting meeting : meetings)
-            if(meeting.getRoom() == room) filtredList.add(meeting);
+        service.getRoomsFilteredMeetings(room);
         assertEquals(filtredList.size(), expected);
     }
 

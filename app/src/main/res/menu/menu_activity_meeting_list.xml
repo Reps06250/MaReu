@@ -11,7 +11,8 @@
         <menu>
             <item
                 android:id="@+id/by_rooms"
-                android:title="Filter By Room"/>
+                android:title="Filter By Room"
+                android:checkable="true"/>
             <item
                 android:id="@+id/by_Date"
                 android:title="Filter By Date"

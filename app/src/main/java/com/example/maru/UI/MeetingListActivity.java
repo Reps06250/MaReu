@@ -31,6 +31,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     Calendar calendar;
     private int year,month,day;
     private long date;
+    private MenuItem item;
+    private String room;
     private MeetingApiService apiService = DI.getMeetingApiService();
     private MeetingApiService newApiService = DI.getNewInstanceApiService();
 
@@ -45,13 +47,24 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         fab = findViewById(R.id.add_meeting);
-        System.out.println();
+        item = findViewById(R.id.by_rooms);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AddMeetingActivity.navigate(MeetingListActivity.this);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     private void configureToolbar(){
@@ -65,9 +78,16 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         return true;
     }
 
+    public void onEvent(LaunchDialogEvent event) {
+        String dialog = event.getDialog();
+        if(dialog.equals("roomFilter"))
+                room = event.getString();
+        if(!room.equals("ALL")) item.setChecked(true);
+        else item.setChecked(false);
+        }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if(item.getItemId() == R.id.by_rooms){
             RoomDialogFragment roomDialogFragment = new RoomDialogFragment(true);
             roomDialogFragment.show(getSupportFragmentManager(), "roomPicker");
@@ -80,7 +100,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
             else{
                 item.setChecked(true);
                 DatePickerDialog dpd = DatePickerDialog.newInstance(MeetingListActivity.this, year, month, day);
-                dpd.setTitle("Date des réunions");
+                dpd.setTitle(getString(R.string.date_de_la_reunion));
                 dpd.setDisabledDays(apiService.getDisabledDays());
                 dpd.show(getSupportFragmentManager(), "DatePickerDialog");
             }

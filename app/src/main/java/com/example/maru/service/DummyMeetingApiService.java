@@ -14,7 +14,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     private Timepoint openHour = new Timepoint(8,00);
     private Timepoint closedHour = new Timepoint(22,00);
     private Calendar[] disabledDays = new Calendar[0];
-    private int minuteIntervalInt = 15; //minimum 1
+    private int minuteIntervalInt = 5; //minimum 1
     private int maxMeetingTimeInMinutes = 240;
     private List<String> colors = Arrays.asList("#7FE873F2","#7F7F73F2","#8073F29D","#80F2F273","#7FF27573");
 
