@@ -9,7 +9,7 @@ import java.util.List;
 public interface MeetingApiService {
 
     List<Meeting> getMeetings();
-    List<Meeting> getRoomsFilteredMeetings(String room);
+    List<Meeting> getRoomsFilteredMeetings(List<Meeting> list, String room);
     List<Meeting> getDateFilteredMeetings(List<Meeting> list, long date);
     List<String> getRoomsList();
     String getColor() ;
@@ -25,4 +25,5 @@ public interface MeetingApiService {
     void deleteMeeting(Meeting meeting);
 
     void createMeeting(Meeting meeting);
+    void resetMeetings();
 }

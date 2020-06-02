@@ -6,16 +6,15 @@
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_filter_list_white_24dp"
         app:showAsAction="ifRoom"
-        android:title="Filtre">
+        android:title="Filtres">
 
         <menu>
             <item
                 android:id="@+id/by_rooms"
-                android:title="Filter By Room"
-                android:checkable="true"/>
+                android:title="@string/filter_by_room"/>
             <item
                 android:id="@+id/by_Date"
-                android:title="Filter By Date"
+                android:title="@string/filter_by_date"
                 android:checkable="true"/>
         </menu>
 

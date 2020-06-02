@@ -1,14 +1,14 @@
 package com.example.maru.UI.AddMeeting;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.maru.Event.LaunchDialogEvent;
 import com.example.maru.R;
@@ -19,15 +19,14 @@ import com.example.maru.model.Meeting;
 import com.example.maru.service.MeetingApiService;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.Timepoint;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
+
 import de.greenrobot.event.EventBus;
 
 public class AddMeetingActivity extends AppCompatActivity implements View.OnClickListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -88,32 +87,33 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         EventBus.getDefault().unregister(this);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
     @Override
     public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        dateString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-        binding.dateBt.setText(getString(R.string.date_de_la_reunion) + dateString);
         try {
-            date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(dateString)).getTime();
+            date = Objects.requireNonNull(new SimpleDateFormat(getString(R.string.patern_dd_MM_yyyy)).parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        dateString = new SimpleDateFormat(getString(R.string.patern_dd_MM_yyyy)).format(date);
+        binding.dateBt.setText(getString(R.string.date_de_la_reunion) +" " + dateString);
         binding.dateBt.setBackgroundResource(R.drawable.border2);
         launchDuree();
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        if(hourOfDay >=10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion) + hourOfDay + "H0" + minute);
-        else if (hourOfDay < 10 && minute > 0) binding.timeBt.setText(String.format(Locale.ENGLISH,getString(R.string.heure_de_la_reunion1), hourOfDay, minute));
-        else if (hourOfDay < 10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion2) + hourOfDay + "H0" + minute);
-        else binding.timeBt.setText(getString(R.string.heure_de_le_reunion3) + hourOfDay + "H" + minute);
+//        if(hourOfDay >=10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion) + hourOfDay + "H0" + minute);
+//        else if (hourOfDay < 10 && minute > 0) binding.timeBt.setText(String.format(Locale.ENGLISH,getString(R.string.heure_de_la_reunion1), hourOfDay, minute));
+//        else if (hourOfDay < 10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion2) + hourOfDay + "H0" + minute);
+//        else binding.timeBt.setText(getString(R.string.heure_de_le_reunion3) + hourOfDay + "H" + minute);
         try {
             time = Objects.requireNonNull(new SimpleDateFormat("HH:mm").parse(hourOfDay + ":" + minute)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        binding.timeBt.setText(getString(R.string.heure_de_la_reunion) +"  "+ new SimpleDateFormat("HH:mm").format(time));
         dateAndTime = date + time;
         binding.timeBt.setBackgroundResource(R.drawable.border2);
         launchRooms();
@@ -122,8 +122,8 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     public void onEvent(LaunchDialogEvent event){
         String dialog = event.getDialog();
-        switch(dialog){
-            case "duree" :
+        switch(dialog){     // la logique est que pour présenter les salles disponibles il faut connaitre les heures disponibles, pour qui l'on doit connaitre la durée et la date.
+            case "duree" :  // Donc chaque fois que l'utilisateur redéfini l'un de ces éléments, on ouvre les dialogs suivant pour revérifier les disponibilité.
                 binding.dureeBt.setBackgroundResource(R.drawable.border2);
                 binding.dureeBt.setText(event.getString());
                 duree = event.getL();
@@ -132,17 +132,17 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
             case "room" :
                 binding.roomBt.setBackgroundResource(R.drawable.border2);
                 room = event.getString();
-                binding.roomBt.setText(getString(R.string.salle_de_la_reunion) + room);
-                if(launchOrNot!= 1) launchSubject();
-                break;
+                binding.roomBt.setText(getString(R.string.salle_de_la_reunion) +" "+ room);
+                if(launchOrNot!= 1) launchSubject();  // le sujet et les participants sont exempts de la logique précedemment décrite,
+                break;                                // il n'est donc pas necessaire de réouvrir le dialog si ils l'ont déjà été
             case "subject" :
                 subject = event.getString();
                 if(!subject.equals(""))binding.subjectBt.setBackgroundResource(R.drawable.border2);
-                binding.subjectBt.setText(getString(R.string.sujet) + subject);
+                binding.subjectBt.setText(getString(R.string.sujet) +" "+ subject);
                 if(launchOrNot!= 1) launchParticipants();
                 break;
             case "participants" :
-                launchOrNot = event.getData();
+                launchOrNot = event.getData(); // launchOrNot passe à 1 pour que les dialog sujet et participant ne soit pas réouverts automatiquement
                 listeDesParticipants = event.getString();
                 if(!listeDesParticipants.equals(""))binding.participantsBt.setBackgroundResource(R.drawable.border2);
                 binding.participantsTv.setText(listeDesParticipants);
@@ -226,9 +226,9 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         ActivityCompat.startActivity(activity, intent, null);
     }
 
-    public boolean getDisableTimeTab() {
-        SimpleDateFormat tdfH = new SimpleDateFormat("HH");
-        SimpleDateFormat tdfM = new SimpleDateFormat("mm");
+    public boolean getDisableTimeTab() {           // methode pour savoir qu'elles sont les heures indisponibles sur l'ensemble des salles en tenant compte de la durée souhaitée
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat tdfH = new SimpleDateFormat("HH");       //TODO : trop coûteuse, peut être amélioré si l'idée convient au client
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat tdfM = new SimpleDateFormat("mm");
         List<Long> disableTimeList = new ArrayList<>();
         for(long mDate = date+mApiService.getOpenHourLong(); mDate<(date+mApiService.getClosedHourLong()); mDate+=mApiService.getMinuteIntervalLong()) {
             if (CheckValidity.getFreeRooms(mDate, duree).size() == 0)

@@ -35,4 +35,8 @@
     <string name="toast_room">Indiquer la salle de la réunion svp</string>
     <string name="heure_de_la_reunion_title">Heure de la réunion</string>
     <string name="date_de_la_reunion_title">Date de la réunion</string>
+    <string name="patern_dd_MM_yyyy">dd/MM/yyyy</string>
+    <string name="filter_by_room">Filter By Room</string>
+    <string name="filter_by_date">Filter By Date</string>
+
 </resources>

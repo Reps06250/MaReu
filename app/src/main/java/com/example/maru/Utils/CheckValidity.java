@@ -13,6 +13,8 @@ public class CheckValidity {
 
     public static List<String> getFreeRooms(long dateAndTime, long duree) {
 
+        // Définie qu'elles sont les salles disponibles e fonction de la date, de l'heure et de la durée de la réunion.
+
         List<String> listeDesSallesDisponibles = new ArrayList<>();
         listeDesSallesDisponibles.addAll(mApiService.getRoomsList());
         int count = 0;

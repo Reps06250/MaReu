@@ -66,15 +66,11 @@ public class AddMeetingInstrumentedTest {
         onView(withText("ADD")).perform(click());
         onView(ViewMatchers.withId(R.id.participants_tv0)).check(matches(withText("TEST@test.fr ; ")));
         onView(withText("OK")).perform(click());
-//        onView(ViewMatchers.withId(R.id.date_bt)).check(matches(withText("Date de la réunion : " + date)));
-        onView(ViewMatchers.withId(R.id.date_bt)).check(matches(withText("Date de la réunion : 28/5/2020")));
-//        onView(ViewMatchers.withId(R.id.duree_bt)).check(matches(withText("Pendant :    " + ApiService.getListeDesDurees().get(position))));
-        onView(ViewMatchers.withId(R.id.duree_bt)).check(matches(withText("Pendant :    00H15")));
-        onView(ViewMatchers.withId(R.id.time_bt)).check(matches(withText("Heure de la réunion :   09H15")));
-//        onView(ViewMatchers.withId(R.id.room_bt)).check(matches(withText("Salle de réunion :   " + ApiService.getRoomsList().get(position))));
-        onView(ViewMatchers.withId(R.id.room_bt)).check(matches(withText("Salle de réunion :   A")));
+        onView(ViewMatchers.withId(R.id.date_bt)).check(matches(withText("Date de la réunion : " + date)));
+        onView(ViewMatchers.withId(R.id.duree_bt)).check(matches(withText("Pendant : " + ApiService.getListeDesDurees().get(position))));
+        onView(ViewMatchers.withId(R.id.room_bt)).check(matches(withText("Salle de réunion : " + ApiService.getRoomsList().get(position))));
         onView(ViewMatchers.withId(R.id.subject_bt)).check(matches(withText("SUJET : TEST")));
-        onView(ViewMatchers.withId(R.id.participants_bt)).check(matches(withText("PARTICIPANTS DE LA RÉUNION : ")));
+        onView(ViewMatchers.withId(R.id.participants_bt)).check(matches(withText("PARTICIPANTS DE LA RÉUNION :")));
         onView(ViewMatchers.withId(R.id.participants_tv)).check(matches(withText("TEST@test.fr ; ")));
     }
 

@@ -11,15 +11,15 @@ import java.util.Random;
 
 public class DummyMeetingApiService implements MeetingApiService {
 
-    private Timepoint openHour = new Timepoint(8,00);
-    private Timepoint closedHour = new Timepoint(22,00);
-    private Calendar[] disabledDays = new Calendar[0];
-    private int minuteIntervalInt = 5; //minimum 1
-    private int maxMeetingTimeInMinutes = 240;
-    private List<String> colors = Arrays.asList("#7FE873F2","#7F7F73F2","#8073F29D","#80F2F273","#7FF27573");
+    private Timepoint openHour = new Timepoint(8,00);  // heure minimum de début de réunion
+    private Timepoint closedHour = new Timepoint(22,00); // heure maximum de début de réunion
+    private Calendar[] disabledDays = new Calendar[0]; // jours non selectionnable
+    private int minuteIntervalInt = 15; //minimum 1, interval en minute pour la durée des réunion et la sélection de l'heure
+    private int maxMeetingTimeInMinutes = 240; // duréee maximum d'une réunion
+    private List<String> colors = Arrays.asList("#7FE873F2","#7F7F73F2","#8073F29D","#80F2F273","#7FF27573","#5800E5FF"); // liste des couleurs
 
     private List<Meeting> meetings = DummyMeetingGenerator.generateMeetings();
-    private List<String> rooms = DummyMeetingGenerator.generateRooms();
+    private List<String> rooms = DummyMeetingGenerator.generateRooms(); // liste des salles
 
 
     @Override
@@ -28,7 +28,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     @Override
-    public List<Meeting> getRoomsFilteredMeetings(String room){
+    public List<Meeting> getRoomsFilteredMeetings(List<Meeting> list, String room){
         List<Meeting> filteredList = new ArrayList<>();
         for( Meeting meeting : meetings)
             if(meeting.getRoom() == room) filteredList.add(meeting);
@@ -68,7 +68,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     public long getMinuteIntervalLong() {return minuteIntervalInt * 60_000;}
 
     @Override
-    public List<String> getListeDesDurees() {
+    public List<String> getListeDesDurees() {  // liste des durees de réunion possible en fonction de la durée max et de l'interval souhaité
         List<String> liste = new ArrayList<>();
 
         for(int i = minuteIntervalInt; i <= maxMeetingTimeInMinutes; i+=minuteIntervalInt){
@@ -91,7 +91,10 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     @Override
-    public String getColor(){
+    public void resetMeetings() {meetings = DummyMeetingGenerator.generateMeetings();}
+
+    @Override
+    public String getColor(){ // renvoie une couleur aléatoire qui sera attribué à un meeting
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
     }

@@ -57,7 +57,7 @@ public class MeetingListActivityInstrumentedTest {
         assertEquals("com.example.maru", appContext.getPackageName());
     }
 
-    private MeetingApiService ApiService = DI.getNewInstanceApiService();
+    private MeetingApiService ApiService = DI.getMeetingApiService();
     private MeetingListActivity mActivity;
 
     @Rule
@@ -144,7 +144,7 @@ public class MeetingListActivityInstrumentedTest {
         onView(withId(R.id.recycler_view)).perform(actionOnItemAtPosition(position, click()));
         if(position == 0)onView(ViewMatchers.withId(R.id.fragment_meeting_list_recycler_view)).check(withItemCount(ApiService.getMeetings().size()));
         else {
-            int itemCountExpected = ApiService.getRoomsFilteredMeetings(ApiService.getRoomsList().get(position -1)).size();
+            int itemCountExpected = ApiService.getRoomsFilteredMeetings(ApiService.getMeetings(), ApiService.getRoomsList().get(position -1)).size();
             onView(ViewMatchers.withId(R.id.fragment_meeting_list_recycler_view)).check(withItemCount(itemCountExpected));
         }
     }
@@ -160,7 +160,7 @@ public class MeetingListActivityInstrumentedTest {
         onView(withText("Filter By Date"))
                 .perform(click());
         // Verify that we have really clicked on the icon by checking
-        onView(withText("DATE DE LA RÉUNION")).check(matches(isDisplayed()));
+        onView(withText("DATE DE LA RÉUNION :")).check(matches(isDisplayed()));
     }
 
     @Test

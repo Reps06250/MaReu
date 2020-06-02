@@ -51,7 +51,6 @@ public class ParticipantsPicker extends DialogFragment implements View.OnClickLi
                 String participant = binding.participantEt.getText().toString();
                 if(checkValidEmail(participant)){
                     listeDesParticipants += (participant + " ; ");
-                    //binding.participantEt.clearComposingText();
                     binding.participantEt.setText("");
                     binding.participantsTv0.setText(listeDesParticipants);
                 }

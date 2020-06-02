@@ -11,7 +11,7 @@ public class Meeting {
     private long duree;
     private String color;
 
-    public Meeting(String room, String subject, String participants, long date, long duree, String color){
+    public Meeting(String room, String subject, String participants, long date, long duree, String color){ //date représente la date et l'heure en epochTime, et duree la duree en ms
         this.room = room;
         this.subject = subject;
         this.participants = participants;

@@ -1,5 +1,6 @@
 package com.example.maru.UI;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
                 .inflate(R.layout.meeting_item, parent, false);
         return new MeetingListViewHolder(view);
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MeetingListViewHolder holder, int position) {
         Meeting meeting = meetingsList.get(position);
@@ -46,12 +48,12 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
                 EventBus.getDefault().post(new LaunchDialogEvent("delete", meeting));
             }
         });
-        if(position == this.position){
+        if(position == this.position){       // active le défilement
             holder.details.setSelected(true);
             holder.participants.setSelected(true);
         }
         else{
-            holder.details.setSelected(false);
+            holder.details.setSelected(false);   // le désactive
             holder.participants.setSelected(false);
         }
     }

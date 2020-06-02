@@ -13,6 +13,8 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DureeViewH
 
     private List<String> liste;
 
+    // Cet adapter sert pour les rv des classes DureePicker et RoomDialogPicker
+
     public DialogAdapter(List<String> liste) {
         this.liste = liste;
     }

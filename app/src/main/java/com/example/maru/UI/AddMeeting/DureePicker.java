@@ -59,7 +59,7 @@ public class DureePicker extends DialogFragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         long duree = (position + 1) * mApiService.getMinuteIntervalLong();
-                        EventBus.getDefault().post(new LaunchDialogEvent("duree", "Pendant :    " + adapter.getItem(position), duree));
+                        EventBus.getDefault().post(new LaunchDialogEvent("duree", "Pendant : " + adapter.getItem(position), duree));
                         dismiss();
                     }
                 });
