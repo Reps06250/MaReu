@@ -10,9 +10,11 @@ import com.example.maru.di.DI;
 import com.example.maru.service.MeetingApiService;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,9 +31,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-//import static org.mockito.Mockito.*;
 
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4.class)
 public class AddMeetingInstrumentedTest {
 
@@ -49,7 +51,7 @@ public class AddMeetingInstrumentedTest {
     }
 
     @Test
-    public void goodInput() {
+    public void a_goodInput() {
         int position = 0;
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -75,7 +77,7 @@ public class AddMeetingInstrumentedTest {
     }
 
     @Test
-    public void createNewMeeting() {
+    public void b_createNewMeeting() {
         int position = 0;
         int expectedListSize = ApiService.getMeetings().size() + 1;
         onView(withText("OK")).perform(click());

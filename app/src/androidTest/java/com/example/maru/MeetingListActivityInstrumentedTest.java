@@ -174,7 +174,6 @@ public class MeetingListActivityInstrumentedTest {
                 .perform(click());
         onView(withId(R.id.menu_filter))
                 .perform(click());
-        // Click the item.
         onView(withText("Filter By Date"))
                 .perform(click());
         onView(withText("OK")).perform(click());
