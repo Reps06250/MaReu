@@ -34,7 +34,6 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     private ActivityAddMeetingBinding binding;
     MeetingApiService mApiService;
     Calendar calendar;
-    private String dateString;
     private long date = 0;
     private long time = 0;
     private int launchOrNot;
@@ -95,7 +94,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        dateString = new SimpleDateFormat(getString(R.string.patern_dd_MM_yyyy)).format(date);
+        String dateString = new SimpleDateFormat(getString(R.string.patern_dd_MM_yyyy)).format(date);
         binding.dateBt.setText(getString(R.string.date_de_la_reunion) +" " + dateString);
         binding.dateBt.setBackgroundResource(R.drawable.border2);
         launchDuree();
@@ -104,16 +103,13 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-//        if(hourOfDay >=10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion) + hourOfDay + "H0" + minute);
-//        else if (hourOfDay < 10 && minute > 0) binding.timeBt.setText(String.format(Locale.ENGLISH,getString(R.string.heure_de_la_reunion1), hourOfDay, minute));
-//        else if (hourOfDay < 10 && minute < 10) binding.timeBt.setText(getString(R.string.heure_de_la_reunion2) + hourOfDay + "H0" + minute);
-//        else binding.timeBt.setText(getString(R.string.heure_de_le_reunion3) + hourOfDay + "H" + minute);
         try {
             time = Objects.requireNonNull(new SimpleDateFormat("HH:mm").parse(hourOfDay + ":" + minute)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        binding.timeBt.setText(getString(R.string.heure_de_la_reunion) +"  "+ new SimpleDateFormat("HH:mm").format(time));
+        String timeString = new SimpleDateFormat("HH:mm").format(time);
+        binding.timeBt.setText(getString(R.string.heure_de_la_reunion) +"  "+ timeString.replace(':', 'H'));
         dateAndTime = date + time;
         binding.timeBt.setBackgroundResource(R.drawable.border2);
         launchRooms();
