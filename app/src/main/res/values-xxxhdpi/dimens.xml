@@ -7,6 +7,7 @@
     <dimen name="meeting_item_margin">15dp</dimen>
     <dimen name="meeting_item_circlesize">50dp</dimen>
     <dimen name="meeting_item_info_width">300dp</dimen>
+    <dimen name="meeting_item_info_width_land">550dp</dimen>
     <dimen name="meeting_item_info_text_size">20sp</dimen>
     <dimen name="meeting_item_participants_text_size">15sp</dimen>
 

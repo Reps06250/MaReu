@@ -5,8 +5,9 @@
     <dimen name="activity_meeting_list_fab_margin">16dp</dimen>
 
     <dimen name="meeting_item_margin">0dp</dimen>
-    <dimen name="meeting_item_circlesize">30dp</dimen>
+    <dimen name="meeting_item_circlesize">35dp</dimen>
     <dimen name="meeting_item_info_width">240dp</dimen>
+    <dimen name="meeting_item_info_width_land">450dp</dimen>
     <dimen name="meeting_item_info_text_size">16sp</dimen>
     <dimen name="meeting_item_participants_text_size">13sp</dimen>
 
