@@ -56,7 +56,6 @@ public class AddMeetingInstrumentedTest {
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String date = sdf.format(today);
-
         onView(withText("OK")).perform(click());
         onView(withId(R.id.recycler_view)).perform(actionOnItemAtPosition(position, click()));
         onView(withText("OK")).perform(click());
