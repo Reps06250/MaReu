@@ -64,17 +64,31 @@ public class MeetingUnitTest {
 
     @Test
     public void RoomFilter() {
-        int expected = 1;
+        int expected = 0;
         String room = "F";
         List<Meeting> meetings = service.getMeetings();
-        assertEquals(service.getRoomsFilteredMeetings(meetings, room).size() , expected);
+        List<Meeting> filtredMeetings = service.getRoomsFilteredMeetings(meetings, room);
+        for(Meeting meeting : meetings){
+            if(meeting.getRoom().equals(room)){
+                assertTrue(filtredMeetings.contains(meeting));
+                expected ++;
+            }
+        }
+        assertEquals(filtredMeetings.size() , expected);
     }
 
     @Test
     public void DateFilter() {
-        int expected = 1;
-        long date = 1593335700000L;
+        int expected = 0;
+        long date = 1589902200000L;
         List<Meeting> meetings = service.getMeetings();
-        assertEquals(service.getDateFilteredMeetings(meetings, date).size() , expected);
+        List<Meeting> filtredMeetings = service.getDateFilteredMeetings(meetings, date);
+        for(Meeting meeting : meetings){
+            if(meeting.getDate()/86400000 == date/86400000){
+                assertTrue(filtredMeetings.contains(meeting));
+                expected ++;
+            }
+        }
+        assertEquals(filtredMeetings.size() , expected);
     }
 }
