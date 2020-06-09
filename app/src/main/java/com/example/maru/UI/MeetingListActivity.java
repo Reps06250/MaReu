@@ -78,6 +78,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
                 item.setChecked(true);                                                     // sinon ouvre le datePicker pour choisir la date du filtre
                 DatePickerDialog dpd = DatePickerDialog.newInstance(MeetingListActivity.this, year, month, day);
                 dpd.setTitle(getString(R.string.date_de_la_reunion));
+                dpd.setCancelText(getString(R.string.cancel));
+                dpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
                 dpd.setDisabledDays(apiService.getDisabledDays());
                 dpd.show(getSupportFragmentManager(), "DatePickerDialog");
             }
