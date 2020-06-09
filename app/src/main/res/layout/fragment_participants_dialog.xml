@@ -36,14 +36,13 @@
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/participants_tv0"
-        android:text="@string/fragment_participants_dialog_participants_tv"
-        android:gravity="center"
-        android:textSize="@dimen/fragment_participants_dialog_tv_text_size"
-        android:padding="20dp"/>
+        android:layout_marginTop="2dp"
+        android:layout_gravity="center_horizontal"
+        />
 
     <Button
         android:layout_width="wrap_content"

@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.*;
 
@@ -49,9 +51,10 @@ public class MeetingUnitTest {
     @Test
     public void createMeetingWithSuccess() {
         List<Meeting> meetings = service.getMeetings();
+        List<String> participants = Arrays.asList("moi");
         // save meetings list size
         int meetingsOriginalSize = meetings.size();
-        Meeting meeting= new Meeting("A", "Android","laura, nico, pauline, sandrine",1589882400000L,1800000L,"#E873F2");
+        Meeting meeting= new Meeting("A", "Android",participants,1589882400000L,1800000L,"#E873F2");
         //check meetings not contain meeting
         assertFalse(service.getMeetings().contains(meeting));
         // Add meeting

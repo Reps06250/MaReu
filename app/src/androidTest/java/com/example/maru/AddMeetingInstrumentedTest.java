@@ -65,14 +65,13 @@ public class AddMeetingInstrumentedTest {
         onView(withId(R.id.ok_subject_bt)).perform(click());
         onView(withId(R.id.participant_et)).perform(typeText("TEST@test.fr"),closeSoftKeyboard());
         onView(withText("ADD")).perform(click());
-        onView(ViewMatchers.withId(R.id.participants_tv0)).check(matches(withText("TEST@test.fr ; ")));
         onView(withText("OK")).perform(click());
         onView(ViewMatchers.withId(R.id.date_bt)).check(matches(withText("Date de la réunion : " + date)));
         onView(ViewMatchers.withId(R.id.duree_bt)).check(matches(withText("Pendant : " + ApiService.getListeDesDurees().get(position))));
         onView(ViewMatchers.withId(R.id.room_bt)).check(matches(withText("Salle de réunion : " + ApiService.getRoomsList().get(position))));
         onView(ViewMatchers.withId(R.id.subject_bt)).check(matches(withText("SUJET : TEST")));
         onView(ViewMatchers.withId(R.id.participants_bt)).check(matches(withText("PARTICIPANTS DE LA RÉUNION :")));
-        onView(ViewMatchers.withId(R.id.participants_tv)).check(matches(withText("TEST@test.fr ; ")));
+        onView(ViewMatchers.withId(R.id.participants_tv)).check(matches(withText("TEST@test.fr; ")));
     }
 
     @Test

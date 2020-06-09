@@ -47,7 +47,7 @@ public class DureePicker extends DialogFragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
-        adapter = new DialogAdapter(mApiService.getListeDesDurees());
+        adapter = new DialogAdapter(mApiService.getListeDesDurees(), false);
         recyclerView.setAdapter(adapter);
         configureOnClickRecyclerView();
         return view;

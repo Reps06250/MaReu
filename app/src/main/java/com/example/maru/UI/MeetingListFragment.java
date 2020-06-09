@@ -17,6 +17,8 @@ import com.example.maru.databinding.FragmentMeetingListBinding;
 import com.example.maru.di.DI;
 import com.example.maru.model.Meeting;
 import com.example.maru.service.MeetingApiService;
+
+import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -57,6 +59,7 @@ public class MeetingListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Collections.sort(meetingsList);
         adapter = new MeetingListRecyclerViewAdapter(meetingsList);  // initialisé dans le onResume pour mettre à jour la rv au resume
         recyclerView.setAdapter(adapter);
     }

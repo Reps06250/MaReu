@@ -66,8 +66,8 @@ public class RoomDialogFragment extends DialogFragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
-        if(fromMenu)adapter = new DialogAdapter(listWithAll);
-        else adapter = new DialogAdapter(CheckValidity.getFreeRooms(dateAndTime,duree));
+        if(fromMenu)adapter = new DialogAdapter(listWithAll,false);
+        else adapter = new DialogAdapter(CheckValidity.getFreeRooms(dateAndTime,duree),false);
         recyclerView.setAdapter(adapter);
         configureOnClickRecyclerView();
         return view;

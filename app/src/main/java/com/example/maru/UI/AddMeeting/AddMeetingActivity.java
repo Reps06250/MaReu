@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +47,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     private long duree = 0;
     private String room;
     private String subject = "";
-    private String listeDesParticipants = "";
+    private List<String> listeDesParticipants = new ArrayList<>();
 
 
     @Override
@@ -139,9 +141,11 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
                 break;
             case "participants" :
                 launchOrNot = event.getData(); // launchOrNot passe à 1 pour que les dialog sujet et participant ne soit pas réouverts automatiquement
-                listeDesParticipants = event.getString();
-                if(!listeDesParticipants.equals(""))binding.participantsBt.setBackgroundResource(R.drawable.border2);
-                binding.participantsTv.setText(listeDesParticipants);
+                listeDesParticipants = event.getStringList();
+                String participantsString = "";
+                for(String string : listeDesParticipants) participantsString += (string + "; ");
+                if(!participantsString.equals(""))binding.participantsBt.setBackgroundResource(R.drawable.border2);
+                binding.participantsTv.setText(participantsString);
         }
     }
 
@@ -173,7 +177,9 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         else if(duree == 0) Toast.makeText(getApplicationContext(),R.string.toast_duree,Toast.LENGTH_SHORT).show();
         else{
             TimePickerDialog tpd = TimePickerDialog.newInstance(AddMeetingActivity.this, hour, minute, h24);
+            tpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
             tpd.setTitle(getString(R.string.heure_de_la_reunion_title));
+            tpd.setCancelText(getString(R.string.cancel));
             tpd.setMinTime(mApiService.getOpenHour());
             tpd.setMaxTime(mApiService.getClosedHour());
             tpd.setTimeInterval(1,mApiService.getMinuteIntervalInt());
@@ -185,6 +191,8 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     public void launchDate(){
         com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(AddMeetingActivity.this, year, month, day);
         dpd.setTitle(getString(R.string.date_de_la_reunion_title));
+        dpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
+        dpd.setCancelText(getString(R.string.cancel));
         dpd.setMinDate(calendar);
         dpd.setDisabledDays(mApiService.getDisabledDays());
         dpd.show(getSupportFragmentManager(), "DatePickerDialog");

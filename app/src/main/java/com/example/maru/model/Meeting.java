@@ -2,16 +2,16 @@ package com.example.maru.model;
 
 import java.util.List;
 
-public class Meeting {
+public class Meeting implements Comparable<Meeting>{
 
     private String room;
     private String subject;
-    private String participants;
+    private List<String> participants;
     private long date;
     private long duree;
     private String color;
 
-    public Meeting(String room, String subject, String participants, long date, long duree, String color){ //date représente la date et l'heure en epochTime, et duree la duree en ms
+    public Meeting(String room, String subject, List<String> participants, long date, long duree, String color){ //date représente la date et l'heure en epochTime, et duree la duree en ms
         this.room = room;
         this.subject = subject;
         this.participants = participants;
@@ -36,11 +36,11 @@ public class Meeting {
         this.subject = subject;
     }
 
-    public String getParticipants() {
+    public List<String> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(String participants) {
+    public void setParticipants(List<String> participants) {
         this.participants = participants;
     }
 
@@ -62,5 +62,14 @@ public class Meeting {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public int compareTo(Meeting meeting) {
+        int res;
+        if((this.date - meeting.date)>0) res = 1;
+        else if((this.date - meeting.date)<0) res = -1;
+        else res = 0;
+        return res;
     }
 }

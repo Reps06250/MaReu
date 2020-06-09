@@ -10,7 +10,7 @@
     <string name="ok">OK</string>
     <string name="fragment_participants_dialog_participants_tv">liste des participants</string>
     <string name="fragment_participants_dialog_add">Add</string>
-    <string name="fragment_participants_dialog_participant_et">Ajouter un participant</string>
+    <string name="fragment_participants_dialog_participant_et">Ajouter une adresse mail</string>
     <string name="fragment_participants_dialog_title">Participants</string>
     <string name="activity_add_meeting_participants_bt">Participants de la réunion :</string>
     <string name="activity_add_meeting_subject_bt">Sujet de la réunion</string>
@@ -38,5 +38,6 @@
     <string name="patern_dd_MM_yyyy">dd/MM/yyyy</string>
     <string name="filter_by_room">Filter By Room</string>
     <string name="filter_by_date">Filter By Date</string>
+    <string name="cancel">Annuler</string>
 
 </resources>

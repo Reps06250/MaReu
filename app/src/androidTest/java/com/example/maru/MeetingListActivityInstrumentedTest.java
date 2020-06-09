@@ -24,8 +24,10 @@ import org.junit.runner.RunWith;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -88,7 +90,7 @@ public class MeetingListActivityInstrumentedTest {
     @Test
     public void myMeetingsList_deleteAction_shouldRemoveItem() {
         int position = 1;
-        int ITEMS_COUNT = 5;
+        int ITEMS_COUNT = ApiService.getMeetings().size();
         // Given : We remove the element at position 1
         onView(withId(R.id.fragment_meeting_list_recycler_view)).check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
@@ -101,8 +103,9 @@ public class MeetingListActivityInstrumentedTest {
     @Test
     public void createMeeting_shouldAddItem() {
         int position = 1;
-        int expected = 5;
-        ApiService.createMeeting(new Meeting("A","La vie d'Amora, l'inventeur du tire cornichon","moi",1589882400000L,1800000L,"#E873F2"));
+        List<String> participants = Arrays.asList("moi");
+        int expected = ApiService.getMeetings().size();
+        ApiService.createMeeting(new Meeting("A","La vie d'Amora, l'inventeur du tire cornichon",participants,1589882400000L,1800000L,"#E873F2"));
         onView(withId(R.id.fragment_meeting_list_recycler_view))
                 .perform(actionOnItemAtPosition(position, new DeleteViewAction()));
         onView(withId(R.id.fragment_meeting_list_recycler_view)).check(withItemCount(expected));
