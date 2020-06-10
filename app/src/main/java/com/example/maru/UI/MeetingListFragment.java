@@ -80,7 +80,7 @@ public class MeetingListFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {  //active le défilement lors du clic sur un item
-                        Meeting meeting = adapter.getMeeting(position);
+                        adapter.getMeeting(position);
                         adapter.notifyDataSetChanged();
                     }
                 });

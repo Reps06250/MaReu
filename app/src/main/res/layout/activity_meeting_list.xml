@@ -19,8 +19,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:title="@string/app_name"
-        app:titleTextColor="@android:color/white"
-        tools:ignore="MissingConstraints" />
+        app:titleTextColor="@android:color/white"/>
 
     <fragment android:name="com.example.maru.UI.MeetingListFragment"
         android:id="@+id/list"

@@ -9,8 +9,13 @@ import java.util.List;
 public interface MeetingApiService {
 
     List<Meeting> getMeetings();
+    void resetMeetings();
+
+    void deleteMeeting(Meeting meeting);
+
     List<Meeting> getRoomsFilteredMeetings(List<Meeting> list, String room);
     List<Meeting> getDateFilteredMeetings(List<Meeting> list, long date);
+
     List<String> getRoomsList();
     String getColor() ;
     Timepoint getOpenHour();
@@ -21,9 +26,5 @@ public interface MeetingApiService {
     int getMinuteIntervalInt();
     long getMinuteIntervalLong();
     List<String> getListeDesDurees();
-
-    void deleteMeeting(Meeting meeting);
-
     void createMeeting(Meeting meeting);
-    void resetMeetings();
 }

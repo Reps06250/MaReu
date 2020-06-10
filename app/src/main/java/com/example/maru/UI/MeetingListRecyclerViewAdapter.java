@@ -81,9 +81,8 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         }
     }
 
-    public Meeting getMeeting(int position){
+    public void getMeeting(int position){
         this.position = position;
-        return meetingsList.get(position);
     }
 
     public String getTime(Meeting meeting){
